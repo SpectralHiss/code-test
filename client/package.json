@@ -1,0 +1,30 @@
+{
+  "name": "houssem",
+  "version": "0.0.1",
+  "description": "code test for ravelin",
+  "main": "index.js",
+  "dependencies": {
+    "bower": "^1.7.9",
+    "jasmine": "^2.4.1"
+  },
+  "devDependencies": {
+    "body-parser": "^1.15.2",
+    "jasmine": "^2.4.1",
+    "mocha": "^2.5.3",
+    "selenium-webdriver": "^2.53.3",
+    "should": "^10.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/SpectralHiss/code-test.git"
+  },
+  "keywords": [
+    "test"
+  ],
+  "author": "Houssem El Fekih",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SpectralHiss/code-test/issues"
+  },
+  "homepage": "https://github.com/SpectralHiss/code-test#readme"
+}

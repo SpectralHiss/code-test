@@ -1,0 +1,13 @@
+{
+  "eventType": "resize",
+  "websiteUrl": "https://localhost:8182/resize",
+  "sessionId": "123123-123123-123123123",
+  "beforeDimensions": {
+  	"width": "1000px",
+  	"length":"1000px"
+  },
+  "afterDimensions": {
+  	"width":"100px",
+  	"length":"100px"
+  }
+}
