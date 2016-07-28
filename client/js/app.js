@@ -1,8 +1,14 @@
 requirejs.config({
-    "baseUrl": "js/lib",
+    "baseUrl": "/js/lib",
     "paths": {
-      "app": "../app"
-    }
+      "app": "/js/app"
+    },
+    "shim": {
+    	debounce: {
+    		deps:['jquery'],
+    		exports: 'debounce'
+    	}
+    },
 });
 
 // Load the main app module to start the app

@@ -1,0 +1,14 @@
+var page = require('webpage').create();
+
+page.open('http://localhost:8081/tests/resize', function(status) {
+  console.log("Status: " + status);
+  if(status === "success") {
+    // hack, hack , hack..
+    setTimeout(function(){
+    	page.viewportSize = {"height":640,"width":1035};
+    },1000);
+  }
+
+  setTimeout(phantom.exit,2000);
+});
+

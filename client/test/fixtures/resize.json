@@ -2,12 +2,12 @@
   "eventType": "resize",
   "websiteUrl": "https://localhost:8182/resize",
   "sessionId": "123123-123123-123123123",
-  "beforeDimensions": {
-  	"width": "1000px",
-  	"length":"1000px"
-  },
+  "beforeDimensions":{
+  	"width": 400,
+  	"height":391
+   },
   "afterDimensions": {
-  	"width":"100px",
-  	"length":"100px"
+  	"width":1035,
+  	"height":640
   }
 }

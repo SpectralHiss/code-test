@@ -1,0 +1,35 @@
+var page = require('webpage').create();
+
+page.open('http://localhost:8081/tests/paste', function(status) {
+  console.log("Status: " + status);
+  if(status === "success") {
+
+    setTimeout(function(){
+    	// while this is not the only way to copy paste , it is one of them
+    	// and is the most common user facing-one.
+    	// we are selecting a form field by focusing and pressing Ctrl+a
+
+    	// then sending Ctrl+c
+    	// then selecting another one and sending Ctrl+v
+    	page.evaluate(function(){ 
+    		$('#inputEmail').val('the bees are stinging');
+    		$('#inputEmail').focus();
+    	});
+    	
+    	// select and copy as before
+    	page.sendEvent('keypress', page.event.key.A, null, null,0x04000000);
+		page.sendEvent('keypress', page.event.key.C, null, null,0x04000000);
+
+		page.evaluate(function(){ 
+    		$('#inputCVV').focus();
+    	});
+    	
+    	// paste
+    	page.sendEvent('keypress', page.event.key.V, null, null,0x04000000);
+
+    },1000);
+  }
+
+  setTimeout(phantom.exit,2000);
+});
+
