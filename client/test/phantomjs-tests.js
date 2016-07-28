@@ -1,7 +1,5 @@
 const exec = require('child_process').exec;
 
-var debug = process.env['DEBUG_TESTS'];
-
 exports.resizeTest = function(done) {
 	runPhantom('resize.ghost', done);
 }
@@ -11,7 +9,11 @@ exports.copy = function(done) {
 }
 
 exports.paste = function(done) {
-	runPhantom('paste.ghost', done)
+	runPhantom('paste.ghost', done);
+}
+
+exports.delay = function(done) {
+	runPhantom('delay.ghost',done);
 }
 
 exports.clearResults = function(done) {
@@ -21,24 +23,20 @@ exports.clearResults = function(done) {
 			return;
 		}
 
-		if (debug == true) {
-			console.log(`stdout: ${stdout}`);
-		}
-
 		done();
 	});
 
 }
 
+
+// each of these tests is capped at 2 seconds by phantomjs
 function runPhantom(testFilename, done) {
 	exec('phantomjs ' + __dirname + '/ghosts/' + testFilename, (error, stdout, stderr) => {
 		if (error) {
 			console.error(`exec error: ${error}`);
 			return;
 		}
-		if (debug == true) {
-			console.log(`stdout: ${stdout}`);
-		}
+	
 		done();
 	});
 }

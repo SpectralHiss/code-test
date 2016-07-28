@@ -1,4 +1,5 @@
-define(['app/resize','app/copypaste'], function(resize,copypaste) {
+define(['app/resize','app/copypaste','app/delay'], function(resize,copypaste,delay) {
 	resize.registerHooks();
 	copypaste.registerHooks();
+	delay.registerHooks();
 });

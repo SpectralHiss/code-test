@@ -13,8 +13,8 @@ define(['jquery', 'debounce', 'app/reporter'], function($, debounce, reporter) {
 	return {
 		registerHooks: function() {
 			$(window).resize($.throttle(function() {
-				var newSize = getSize();
-
+				var newSize = getSize();	// this is to prevent some strange behaviour where resize is triggered in phantomjs.
+				if ( !(newSize['height'] == oldSize['height'] && newSize['width'] == oldSize['width']) ) { 
 					var resizeEvent = {
 						"eventType": "resize",
 						"websiteUrl": "https://localhost:8182/resize",
@@ -24,8 +24,9 @@ define(['jquery', 'debounce', 'app/reporter'], function($, debounce, reporter) {
 						"afterDimensions": newSize
 					};
 
-				reporter.postData(resizeEvent);
-				oldSize = newSize;
+					reporter.postData(resizeEvent);
+					oldSize = newSize;
+				}
 			}, 200));
 
 		}

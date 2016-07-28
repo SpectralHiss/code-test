@@ -27,7 +27,6 @@ app.get('/tests/:testName', function(req, resp) {
 
 
 app.post('/testData/:testname', function(req, resp) {
-    console.log(req.body.params);
 
     var testName = req['params']['testname'];
 
