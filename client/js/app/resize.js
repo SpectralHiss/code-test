@@ -20,8 +20,8 @@ define(['jquery', 'debounce', 'app/reporter'], function($, debounce, reporter) {
 						"websiteUrl": "https://localhost:8182/resize",
 						"sessionId": "123123-123123-123123123", // i suppose this is meant
 						// to be a session cookie? setting to constant
-						"beforeDimensions": oldSize,
-						"afterDimensions": newSize
+						"resizeFrom": oldSize,
+						"resizeTo": newSize
 					};
 
 					reporter.postData(resizeEvent);

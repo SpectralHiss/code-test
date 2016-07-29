@@ -2,11 +2,11 @@
   "eventType": "resize",
   "websiteUrl": "https://localhost:8182/resize",
   "sessionId": "123123-123123-123123123",
-  "beforeDimensions":{
+  "resizeFrom":{
   	"width": 400,
   	"height":391
    },
-  "afterDimensions": {
+  "resizeTo": {
   	"width":1035,
   	"height":640
   }

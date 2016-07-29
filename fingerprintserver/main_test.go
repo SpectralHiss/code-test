@@ -15,13 +15,16 @@ import (
 func TestStartedOK(t *testing.T) {
 
 	cmd := exec.Command("fingerprintserver")
-	stdout, err := cmd.StdoutPipe()
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+
+	err := cmd.Start()
 
 	if err != nil {
 		t.Error("server failed to start", err)
 	}
 
-	time.Sleep(1 * time.Second)
+	time.Sleep(2 * time.Second)
 
 	if isOpen(8080) {
 		t.Error("server is not listening")
@@ -35,17 +38,41 @@ func TestStartedOK(t *testing.T) {
 		panic(err)
 	}
 
-	_, err = client.Post("resize", "application/json", f)
+	output := make(chan event.ResizeEventReport)
+
+	go func(c chan event.ResizeEventReport) {
+		var result = event.ResizeEventReport{}
+		if err := json.NewDecoder(os.Stdin).Decode(&result); err != nil {
+			t.Error("we do not see the object being created in terminal")
+		}
+		c <- result
+	}(output)
+
+	// just checking for resize the rest can be manually tested through
+	// the client web app
+
+	_, err = client.Post("http://localhost:8080/resize", "application/json", f)
 	if err != nil {
 		t.Error("request to server failed", err)
 	}
 
-	if err := json.NewDecoder(stdout).Decode(&event.ResizeEventReport{}); err != nil {
-		t.Error("we do not see the object being created in terminal")
+	testResult := <-output
+
+	expected := event.Data{
+	WebsiteUrl         "something"
+	SessionId          "something"
+	ResizeFrom         event.Dimension{"height":"something", "width":"something"}
+	ResizeTo event.Dimension{"height":"something", "width":"something"}
 	}
 
-	//fmt.Printf(stdout.)
-	//cmd.Process.Kill()
+	if result != expected {
+		t.Error(result ," does not match ", expected);
+	} 
+
+	if err := cmd.Wait(); err != nil {
+		t.Fatal(err)
+	}
+
 }
 
 // helpers:
