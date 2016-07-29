@@ -6,7 +6,7 @@ var app = express(),
     fs = require('fs');
 
 app.use(bodyParser.json());
-app.use(express.static('.'));
+app.use(express.static(__dirname));
 
 app.get('/tests/:testName', function(req, resp) {
     var testName = req['params']['testName'];

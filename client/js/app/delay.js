@@ -10,7 +10,7 @@ define(['jquery', 'app/reporter'], function($, reporter) {
 					}
 				});
 
-			$("button[type='submit']").on('click', function(e) {
+			$("button[type='submit']").on('submit click', function(e) {
 				e.preventDefault();
 				var eventData = {
 					"eventType": "timeTaken",

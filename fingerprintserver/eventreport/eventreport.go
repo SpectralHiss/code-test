@@ -9,12 +9,12 @@ type CopyEventReport struct {
 }
 
 type Data struct {
-	WebsiteUrl         string          `json:"websiteUrl"`
-	SessionId          string          `json:"sessionId"`
-	ResizeFrom         Dimension       `json:"resizeFrom"`
-	ResizeTo           Dimension       `json:"resizeTo"`
+	WebsiteUrl         string          `json:"website_url"`
+	SessionId          string          `json:"session_id"`
+	ResizeFrom         Dimension       `json:"resize_from"`
+	ResizeTo           Dimension       `json:"resize_to"`
 	CopyAndPaste       map[string]bool // map[fieldId]true
-	FormCompletionTime int             // Seconds
+	FormCompletionTime int             `json:"form_completion_time"`
 }
 
 type DelayEventReport struct {

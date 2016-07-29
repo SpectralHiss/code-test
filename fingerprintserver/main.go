@@ -14,10 +14,16 @@ type Reports map[string]fingerprints.Data
 func main() {
 	reports := Reports{}
 
-	http.HandleFunc("/resize", func(resp http.ResponseWriter, req *http.Request) {
+	http.HandleFunc("/result/resize", func(resp http.ResponseWriter, req *http.Request) {
+		resp.Header().Set("Access-Control-Allow-Origin", "*")
+		resp.Header().Set("access-control-allow-headers", "content-type, accept")
+
 		resize := fingerprints.ResizeEventReport{}
 
-		json.NewDecoder(req.Body).Decode(&resize)
+		err := json.NewDecoder(req.Body).Decode(&resize)
+		if err != nil {
+			return
+		}
 
 		report, ok := reports[resize.SessionID]
 
@@ -30,15 +36,21 @@ func main() {
 
 		reports[resize.SessionID] = report
 
-		fmt.Printf("partial report for user session %s:", resize.SessionID)
+		fmt.Printf("partial report for user session %s:\n", resize.SessionID)
 		printReport(reports[resize.SessionID])
 
 	})
 
-	http.HandleFunc("/copypaste", func(resp http.ResponseWriter, req *http.Request) {
+	http.HandleFunc("/result/copypaste", func(resp http.ResponseWriter, req *http.Request) {
+		resp.Header().Set("Access-Control-Allow-Origin", "*")
+		resp.Header().Set("access-control-allow-headers", "content-type, accept")
+
 		copypaste := fingerprints.CopyEventReport{}
 
-		json.NewDecoder(req.Body).Decode(&copypaste)
+		err := json.NewDecoder(req.Body).Decode(&copypaste)
+		if err != nil {
+			return
+		}
 
 		report, ok := reports[copypaste.SessionID]
 
@@ -56,16 +68,22 @@ func main() {
 
 		reports[copypaste.SessionID] = report
 
-		fmt.Printf("partial report for user session %s:", copypaste.SessionID)
+		fmt.Printf("partial report for user session %s:\n", copypaste.SessionID)
 
 		printReport(reports[copypaste.SessionID])
 
 	})
 
-	http.HandleFunc("/delay", func(resp http.ResponseWriter, req *http.Request) {
+	http.HandleFunc("/result/delay", func(resp http.ResponseWriter, req *http.Request) {
+		resp.Header().Set("Access-Control-Allow-Origin", "*")
+		resp.Header().Set("access-control-allow-headers", "content-type, accept")
+
 		delay := fingerprints.DelayEventReport{}
 
-		json.NewDecoder(req.Body).Decode(&delay)
+		err := json.NewDecoder(req.Body).Decode(&delay)
+		if err != nil {
+			return
+		}
 
 		report, ok := reports[delay.SessionID]
 
@@ -77,18 +95,16 @@ func main() {
 
 		reports[delay.SessionID] = report
 
-		fmt.Printf("final report for user session %s:", delay.SessionID)
+		fmt.Printf("\n\n Final report for user session %s \n\n", delay.SessionID)
 		printReport(reports[delay.SessionID])
 
 	})
-
-	//	http.HandleFunc("/copypaste", func(resp http.ResponseWriter, req *http.Request) {}
 
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
 func initialiseReport(reports map[string]fingerprints.Data, sessionID, websiteURL string) fingerprints.Data {
-	fmt.Printf("a new user session has been started %s", sessionID)
+	fmt.Printf("\n a new user session has been started %s:\n", sessionID)
 	reports[sessionID] = fingerprints.Data{
 		WebsiteUrl: websiteURL,
 		SessionId:  sessionID,

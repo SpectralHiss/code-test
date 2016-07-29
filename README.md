@@ -62,5 +62,6 @@ type Dimension struct {
 ```
 
 
+Houssem: For my solution check  the readme for `client/` and `fingerprintserver/`
 
 

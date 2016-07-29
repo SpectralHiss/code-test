@@ -2,7 +2,7 @@ var testEndpoint;
 define(['jquery'], function() {
 	"use strict";
 
-	var serverResultEndpoint =  "https://localhost:8080/result/"
+	var serverResultEndpoint =  "http://localhost:8080/result/"
 	
 	return {
 		postData: function(data, resource) {
@@ -13,7 +13,6 @@ define(['jquery'], function() {
 				type: "POST",
 				data: JSON.stringify(data),
 				contentType: "application/json; charset=utf-8",
-				dataType: "json"
 			}).done(function(response) {
 				console.log("OK");
 			}).fail(function(jqXHR, textStatus, errorThrown) {
