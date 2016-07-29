@@ -5,17 +5,16 @@
   "main": "index.js",
   "devDependencies": {
     "body-parser": "^1.15.2",
+    "express": "^4.14.0",
     "should": "^10.0.0"
   },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/SpectralHiss/code-test.git"
   },
-
-  "scripts":{
-    "test":"node test-dev-server.js & mocha && kill -9 $(fuser 8081/tcp)"
+  "scripts": {
+    "test": "node test-dev-server.js & mocha && kill -9 $(fuser 8081/tcp)"
   },
-
   "keywords": [
     "test"
   ],
