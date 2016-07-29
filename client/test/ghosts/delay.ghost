@@ -29,7 +29,6 @@ page.open('http://localhost:8081/tests/delay', function(status) {
   }
 
   setTimeout(function() {
-    page.render('test.png');
     phantom.exit();
   }, 10000);
 });

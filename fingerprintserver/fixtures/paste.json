@@ -1,0 +1,7 @@
+{
+  "eventType": "copyAndPaste",
+  "websiteUrl": "http://localhost:8081/tests/paste",
+  "sessionId": "123123-123123-123123123",
+  "pasted": true,
+  "formId": "inputCVV"
+}
