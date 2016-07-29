@@ -1,10 +1,12 @@
-var endpoint;
+var testEndpoint;
 define(['jquery'], function() {
 	"use strict";
+
+	var serverResultEndpoint =  "https://localhost:8080/result/"
 	
 	return {
-		postData: function(data) {
-			var url = (endpoint || "https://localhost:8080/resize");
+		postData: function(data, resource) {
+			var url = (testEndpoint || (serverResultEndpoint+resource));
 			
 			$.ajax({
 				url: url,

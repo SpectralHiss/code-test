@@ -73,7 +73,7 @@ describe('end-to-end fingerprinter tests', function() {
 			var testOutput = JSON.parse(result)
 
 			testOutput["eventType"].should.be.equal("timeTaken");
-			testOutput["websiteUrl"].should.be.equal("http://localhost:8081/tests/delay")
+			testOutput["websiteUrl"].should.be.equal("http://localhost:8081")
 			testOutput["sessionId"].should.be.equal("123123-123123-123123123")
 			testOutput["time"].should.be.approximately(7,1) // seconds
 		})

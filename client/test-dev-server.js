@@ -15,7 +15,7 @@ app.get('/tests/:testName', function(req, resp) {
         // we are appeding tiny test code that sets urlpostvariable 
         // unfortunately it  means it has to be global..
         if (testName != "") {
-            patchedHTML = contents + "<script> endpoint='/testData/" + testName + "';</script>"
+            patchedHTML = contents + "<script> testEndpoint='/testData/" + testName + "';</script>"
             console.log('serving patched page for functional tests');
             resp.send(patchedHTML)
         } else {

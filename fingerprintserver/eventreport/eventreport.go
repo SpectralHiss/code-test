@@ -1,43 +1,38 @@
 package eventreport
 
 type CopyEventReport struct {
-	Common
-	Pasted bool
-	FormID string
-}
-
-type Common struct {
-	EventType  string
-	WebsiteURL string
-	SessionID  string
+	EventType  string `json:"eventType"`
+	WebsiteURL string `json:"websiteUrl"`
+	SessionID  string `json:"sessionId"`
+	Pasted     bool
+	FormID     string `json:"formId"`
 }
 
 type Data struct {
-	WebsiteUrl         string
-	SessionId          string
-	ResizeFrom         Dimension
-	ResizeTo           Dimension
+	WebsiteUrl         string          `json:"websiteUrl"`
+	SessionId          string          `json:"sessionId"`
+	ResizeFrom         Dimension       `json:"resizeFrom"`
+	ResizeTo           Dimension       `json:"resizeTo"`
 	CopyAndPaste       map[string]bool // map[fieldId]true
 	FormCompletionTime int             // Seconds
 }
 
-type Dimension struct {
-	Width  string
-	Height string
-}
-
 type DelayEventReport struct {
-	Common
-	Time int
+	EventType  string `json:"eventType"`
+	WebsiteURL string `json:"websiteUrl"`
+	SessionID  string `json:"sessionId"`
+	Time       int
 }
 
-type Dimensions struct {
-	Width  string
-	Height string
+type Dimension struct {
+	Width  string `json:"width"`
+	Height string `json:"height"`
 }
 
 type ResizeEventReport struct {
-	Common
-	BeforeDimensions Dimensions
-	AfterDimensions  Dimensions
+	EventType  string    `json:"eventType"`
+	WebsiteURL string    `json:"websiteUrl"`
+	SessionID  string    `json:"sessionId"`
+	ResizeFrom Dimension `json:"resizeFrom"`
+	ResizeTo   Dimension `json:"resizeTo"`
 }

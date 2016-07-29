@@ -5,8 +5,8 @@ define(['jquery', 'debounce', 'app/reporter'], function($, debounce, reporter) {
 
 	function getSize() {
 		return {
-			height: $(document).height(),
-			width: $(document).width()
+			height: $(document).height() + "px",
+			width: $(document).width() + "px"
 		}
 	}
 
@@ -17,14 +17,14 @@ define(['jquery', 'debounce', 'app/reporter'], function($, debounce, reporter) {
 				if ( !(newSize['height'] == oldSize['height'] && newSize['width'] == oldSize['width']) ) { 
 					var resizeEvent = {
 						"eventType": "resize",
-						"websiteUrl": "https://localhost:8182/resize",
+						"websiteUrl": window.location.origin,
 						"sessionId": "123123-123123-123123123", // i suppose this is meant
 						// to be a session cookie? setting to constant
 						"resizeFrom": oldSize,
 						"resizeTo": newSize
 					};
 
-					reporter.postData(resizeEvent);
+					reporter.postData(resizeEvent, "resize");
 					oldSize = newSize;
 				}
 			}, 200));

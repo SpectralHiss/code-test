@@ -14,12 +14,12 @@ define(['jquery', 'app/reporter'], function($, reporter) {
 				e.preventDefault();
 				var eventData = {
 					"eventType": "timeTaken",
-					"websiteUrl": window.location.href,
+					"websiteUrl": window.location.origin,
 					"sessionId": "123123-123123-123123123",
 					"time": parseInt((Date.now() - timeStart) / 1000)
 				};
 
-				reporter.postData(eventData);
+				reporter.postData(eventData, "delay");
 			});
 		}
 	}

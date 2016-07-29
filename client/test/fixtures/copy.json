@@ -1,6 +1,6 @@
 {
   "eventType": "copyAndPaste",
-  "websiteUrl": "http://localhost:8081/tests/copy",
+  "websiteUrl": "http://localhost:8081",
   "sessionId": "123123-123123-123123123",
   "pasted": false,
   "formId": "inputEmail"

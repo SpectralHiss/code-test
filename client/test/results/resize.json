@@ -1,1 +1,1 @@
-{"eventType":"resize","websiteUrl":"https://localhost:8182/resize","sessionId":"123123-123123-123123123","resizeFrom":{"height":391,"width":400},"resizeTo":{"height":640,"width":1035}}
+{"eventType":"resize","websiteUrl":"http://localhost:8081","sessionId":"123123-123123-123123123","resizeFrom":{"height":"391px","width":"400px"},"resizeTo":{"height":"640px","width":"1035px"}}

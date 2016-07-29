@@ -8,11 +8,12 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"reflect"
 	"testing"
 	"time"
 )
 
-func TestStartedOK(t *testing.T) {
+func TestStartedAndResizeOK(t *testing.T) {
 
 	cmd := exec.Command("fingerprintserver")
 	cmd.Stdout = os.Stdout
@@ -33,41 +34,50 @@ func TestStartedOK(t *testing.T) {
 	client := &http.Client{}
 
 	// send resize
-	f, err := os.Open("./fixtures/resize.json")
+	reqJSON, err := os.Open("./fixtures/resize_request.json")
 	if err != nil {
 		panic(err)
 	}
 
-	output := make(chan event.ResizeEventReport)
+	output := make(chan event.Data, 1)
 
-	go func(c chan event.ResizeEventReport) {
-		var result = event.ResizeEventReport{}
+	_, err = client.Post("http://localhost:8080/resize", "application/json", reqJSON)
+
+	go func() {
+		var result = event.Data{}
 		if err := json.NewDecoder(os.Stdin).Decode(&result); err != nil {
 			t.Error("we do not see the object being created in terminal")
 		}
-		c <- result
-	}(output)
+
+		output <- result
+	}()
 
 	// just checking for resize the rest can be manually tested through
 	// the client web app
 
-	_, err = client.Post("http://localhost:8080/resize", "application/json", f)
 	if err != nil {
+
 		t.Error("request to server failed", err)
 	}
 
-	testResult := <-output
+	select {
+	case testResult := <-output:
+		expected := event.Data{
+			WebsiteUrl: "http://localhost:8080",
+			SessionId:  "123123-123123-123123123",
+			ResizeFrom: event.Dimension{Height: "391", Width: "400"},
+			ResizeTo:   event.Dimension{Height: "640", Width: "1035"},
+		}
 
-	expected := event.Data{
-	WebsiteUrl         "something"
-	SessionId          "something"
-	ResizeFrom         event.Dimension{"height":"something", "width":"something"}
-	ResizeTo event.Dimension{"height":"something", "width":"something"}
+		if !reflect.DeepEqual(testResult, expected) {
+			t.Error(testResult, " does not match ", expected)
+		}
+
+	case <-time.After(time.Second * 10):
+		t.Error("test timed out")
 	}
 
-	if result != expected {
-		t.Error(result ," does not match ", expected);
-	} 
+	//cmd.Process.Kill()
 
 	if err := cmd.Wait(); err != nil {
 		t.Fatal(err)
