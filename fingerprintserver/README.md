@@ -1,10 +1,10 @@
-The fingerprint collection server:
+# The fingerprint collection server:
 
 The solution progressively fills up session id reports as instructed, we added some CORS to allow
 our test-dev-server in client.
 
-run static page server with `node ../client/test-dev-server`
-and then run the collection server binary which starts the server in 8080 
+run static page server with `node ../client/test-dev-server` this runs at port 8081
+and then run the collection server binary which starts the server at port 8080 
 
 browse to `localhost://8081` and trigger events, see reports in command line.
 

@@ -1,8 +1,6 @@
-The fingerprinting library
+# The fingerprinting library
 
-
-
-1. To run tests:
+##  To run tests:
 
 ensure node is installed
 run `npm install`
@@ -16,7 +14,7 @@ the browser code posts results to `/result/test`
 It makes use of special endpoints to facilitate acceptance testing, see below.
 
 
-1. Testing approach:
+## Testing approach:
 
 A special endpoint exists under `/test/:testname`.
 This serves a patched index page that makes the fingerprint collector code post to another special endpoint: `/testData/:testname` 
@@ -33,7 +31,7 @@ Note. functional tests can be a bit messy, the solution forces me to add a globa
 where we communicate the value of the "endpoint" it is not fatal to approach because
 in production environment this can be fixed with very little post-processing.
 
-1. Fingerprint collector
+## Fingerprint collector
 
 The collector is composed of 2 main parts:
 
