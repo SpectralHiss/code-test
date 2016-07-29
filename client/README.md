@@ -2,17 +2,15 @@
 
 ##  To run tests:
 
-ensure node is installed
-run `npm install`
-ensure mocha and phantomjs are installed globally
-run `npm test`
+1. ensure node is installed
+1. run `npm install`
+1. ensure mocha and phantomjs are installed globally
+1. run `npm test`
 
-
-test-dev-server.js serves static page at port 8081 for normal user interactions
-the browser code posts results to `/result/test`
+test-dev-server.js serves the static page at port 8081 for normal user interactions
+the browser code posts results to `localhost:8080/result/testname`
 
 It makes use of special endpoints to facilitate acceptance testing, see below.
-
 
 ## Testing approach:
 
